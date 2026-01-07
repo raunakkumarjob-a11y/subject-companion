@@ -25,6 +25,21 @@ export function WelcomeMessage({ subject, onStartConversation }: WelcomeMessageP
       "How do JOINs work?",
       "Explain primary and foreign keys",
     ],
+    javascript: [
+      "What is the difference between let, const, and var?",
+      "How do Promises work?",
+      "Explain closures with an example",
+    ],
+    react: [
+      "What are components in React?",
+      "How does useState work?",
+      "Explain props vs state",
+    ],
+    'system-design': [
+      "How would you design a URL shortener?",
+      "What is horizontal vs vertical scaling?",
+      "Explain load balancing",
+    ],
   };
 
   return (
