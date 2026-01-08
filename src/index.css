@@ -4,141 +4,146 @@
 @tailwind components;
 @tailwind utilities;
 
-/* Subject Tutor Chatbot Design System
-   Theme: Warm classroom/notebook aesthetic
-   All colors in HSL
-*/
-
 @layer base {
   :root {
-    /* Primary: Warm amber/gold - like a desk lamp */
-    --primary: 35 92% 50%;
-    --primary-foreground: 35 10% 98%;
+    /* Clean neutral palette */
+    --primary: 220 90% 56%;
+    --primary-foreground: 0 0% 100%;
     
-    /* Background: Cream paper texture feel */
-    --background: 40 30% 96%;
-    --foreground: 25 25% 15%;
+    /* Light gray background */
+    --background: 220 20% 97%;
+    --foreground: 220 20% 10%;
     
-    /* Cards: Slightly warmer than background */
-    --card: 38 35% 98%;
-    --card-foreground: 25 25% 15%;
+    /* Cards */
+    --card: 0 0% 100%;
+    --card-foreground: 220 20% 10%;
     
-    /* Popover */
-    --popover: 38 35% 98%;
-    --popover-foreground: 25 25% 15%;
+    --popover: 0 0% 100%;
+    --popover-foreground: 220 20% 10%;
     
-    /* Secondary: Sage green - educational, calm */
-    --secondary: 145 25% 88%;
-    --secondary-foreground: 145 40% 25%;
+    /* Secondary */
+    --secondary: 220 15% 93%;
+    --secondary-foreground: 220 20% 25%;
     
-    /* Muted: Soft taupe */
-    --muted: 30 15% 90%;
-    --muted-foreground: 25 15% 45%;
+    /* Muted */
+    --muted: 220 15% 94%;
+    --muted-foreground: 220 10% 45%;
     
-    /* Accent: Soft teal for highlights */
-    --accent: 175 40% 85%;
-    --accent-foreground: 175 50% 25%;
+    /* Accent */
+    --accent: 220 15% 92%;
+    --accent-foreground: 220 20% 20%;
     
-    /* Tutor: Warm earth tones */
-    --tutor: 25 45% 92%;
-    --tutor-foreground: 25 35% 25%;
-    --tutor-border: 25 30% 80%;
+    /* Tutor messages - soft blue */
+    --tutor: 220 60% 97%;
+    --tutor-foreground: 220 30% 20%;
+    --tutor-border: 220 40% 90%;
     
-    /* Student: Clean blue-gray */
-    --student: 210 35% 95%;
-    --student-foreground: 210 25% 25%;
-    --student-border: 210 25% 85%;
+    /* Student messages - clean white */
+    --student: 0 0% 100%;
+    --student-foreground: 220 20% 15%;
+    --student-border: 220 20% 88%;
     
-    /* Success: Warm green */
-    --success: 142 55% 45%;
-    --success-foreground: 142 10% 98%;
+    /* Success */
+    --success: 160 60% 45%;
+    --success-foreground: 0 0% 100%;
     
     /* Destructive */
-    --destructive: 0 75% 55%;
-    --destructive-foreground: 0 10% 98%;
+    --destructive: 0 70% 55%;
+    --destructive-foreground: 0 0% 100%;
     
-    /* Borders and inputs */
-    --border: 30 20% 85%;
-    --input: 30 20% 88%;
-    --ring: 35 70% 50%;
+    /* Borders */
+    --border: 220 15% 90%;
+    --input: 220 15% 92%;
+    --ring: 220 90% 56%;
     
-    /* Radius */
     --radius: 0.75rem;
     
     /* Subject colors */
-    --python: 210 60% 50%;
-    --python-bg: 210 50% 95%;
-    --dsa: 280 50% 55%;
-    --dsa-bg: 280 40% 95%;
-    --sql: 20 80% 50%;
-    --sql-bg: 20 70% 95%;
+    --python: 210 90% 50%;
+    --python-bg: 210 90% 96%;
+    --dsa: 280 70% 55%;
+    --dsa-bg: 280 70% 96%;
+    --sql: 25 95% 50%;
+    --sql-bg: 25 95% 96%;
+    --javascript: 50 100% 50%;
+    --javascript-bg: 50 100% 96%;
+    --react: 190 90% 50%;
+    --react-bg: 190 90% 96%;
+    --system-design: 150 60% 45%;
+    --system-design-bg: 150 60% 96%;
     
     /* Sidebar */
-    --sidebar-background: 38 30% 97%;
-    --sidebar-foreground: 25 25% 25%;
-    --sidebar-primary: 35 92% 50%;
-    --sidebar-primary-foreground: 35 10% 98%;
-    --sidebar-accent: 145 25% 90%;
-    --sidebar-accent-foreground: 145 40% 25%;
-    --sidebar-border: 30 20% 88%;
-    --sidebar-ring: 35 70% 50%;
+    --sidebar-background: 0 0% 100%;
+    --sidebar-foreground: 220 20% 15%;
+    --sidebar-primary: 220 90% 56%;
+    --sidebar-primary-foreground: 0 0% 100%;
+    --sidebar-accent: 220 15% 95%;
+    --sidebar-accent-foreground: 220 20% 25%;
+    --sidebar-border: 220 15% 92%;
+    --sidebar-ring: 220 90% 56%;
   }
 
   .dark {
-    --primary: 35 85% 55%;
-    --primary-foreground: 25 15% 10%;
+    --primary: 220 85% 60%;
+    --primary-foreground: 220 20% 5%;
     
-    --background: 25 20% 10%;
-    --foreground: 35 20% 92%;
+    --background: 220 20% 8%;
+    --foreground: 220 10% 92%;
     
-    --card: 25 18% 14%;
-    --card-foreground: 35 20% 92%;
+    --card: 220 18% 12%;
+    --card-foreground: 220 10% 92%;
     
-    --popover: 25 18% 14%;
-    --popover-foreground: 35 20% 92%;
+    --popover: 220 18% 12%;
+    --popover-foreground: 220 10% 92%;
     
-    --secondary: 145 20% 20%;
-    --secondary-foreground: 145 30% 85%;
+    --secondary: 220 15% 18%;
+    --secondary-foreground: 220 10% 85%;
     
-    --muted: 25 15% 20%;
-    --muted-foreground: 25 15% 65%;
+    --muted: 220 15% 16%;
+    --muted-foreground: 220 10% 55%;
     
-    --accent: 175 30% 25%;
-    --accent-foreground: 175 40% 85%;
+    --accent: 220 15% 18%;
+    --accent-foreground: 220 10% 88%;
     
-    --tutor: 25 25% 18%;
-    --tutor-foreground: 25 20% 88%;
-    --tutor-border: 25 20% 30%;
+    --tutor: 220 30% 16%;
+    --tutor-foreground: 220 15% 88%;
+    --tutor-border: 220 20% 25%;
     
-    --student: 210 20% 20%;
-    --student-foreground: 210 15% 88%;
-    --student-border: 210 15% 35%;
+    --student: 220 18% 14%;
+    --student-foreground: 220 10% 90%;
+    --student-border: 220 15% 25%;
     
-    --success: 142 50% 40%;
-    --success-foreground: 142 10% 98%;
+    --success: 160 55% 40%;
+    --success-foreground: 0 0% 100%;
     
-    --destructive: 0 65% 45%;
-    --destructive-foreground: 0 10% 98%;
+    --destructive: 0 60% 50%;
+    --destructive-foreground: 0 0% 100%;
     
-    --border: 25 15% 25%;
-    --input: 25 15% 22%;
-    --ring: 35 75% 55%;
+    --border: 220 15% 20%;
+    --input: 220 15% 18%;
+    --ring: 220 85% 60%;
     
-    --python: 210 55% 60%;
-    --python-bg: 210 30% 18%;
-    --dsa: 280 45% 65%;
-    --dsa-bg: 280 25% 18%;
-    --sql: 20 75% 55%;
-    --sql-bg: 20 50% 18%;
+    --python: 210 80% 60%;
+    --python-bg: 210 40% 15%;
+    --dsa: 280 60% 65%;
+    --dsa-bg: 280 30% 15%;
+    --sql: 25 85% 55%;
+    --sql-bg: 25 50% 15%;
+    --javascript: 50 90% 55%;
+    --javascript-bg: 50 50% 15%;
+    --react: 190 80% 55%;
+    --react-bg: 190 40% 15%;
+    --system-design: 150 50% 50%;
+    --system-design-bg: 150 30% 15%;
     
-    --sidebar-background: 25 18% 12%;
-    --sidebar-foreground: 35 20% 88%;
-    --sidebar-primary: 35 85% 55%;
-    --sidebar-primary-foreground: 25 15% 10%;
-    --sidebar-accent: 145 20% 22%;
-    --sidebar-accent-foreground: 145 30% 85%;
-    --sidebar-border: 25 15% 22%;
-    --sidebar-ring: 35 75% 55%;
+    --sidebar-background: 220 18% 10%;
+    --sidebar-foreground: 220 10% 88%;
+    --sidebar-primary: 220 85% 60%;
+    --sidebar-primary-foreground: 220 20% 5%;
+    --sidebar-accent: 220 15% 16%;
+    --sidebar-accent-foreground: 220 10% 85%;
+    --sidebar-border: 220 15% 18%;
+    --sidebar-ring: 220 85% 60%;
   }
 }
 
@@ -149,157 +154,74 @@
 
   body {
     @apply bg-background text-foreground antialiased;
-    font-family: 'Inter', sans-serif;
+    font-family: 'Inter', system-ui, sans-serif;
   }
 
-  /* Custom scrollbar */
   ::-webkit-scrollbar {
-    width: 8px;
-    height: 8px;
+    width: 6px;
+    height: 6px;
   }
 
   ::-webkit-scrollbar-track {
-    @apply bg-muted/50 rounded-full;
+    @apply bg-transparent;
   }
 
   ::-webkit-scrollbar-thumb {
-    @apply bg-muted-foreground/30 rounded-full hover:bg-muted-foreground/50 transition-colors;
+    @apply bg-muted-foreground/20 rounded-full hover:bg-muted-foreground/30;
   }
 }
 
 @layer components {
-  /* Tutor message styling */
   .message-tutor {
-    @apply bg-tutor text-tutor-foreground border border-tutor-border;
+    @apply bg-tutor text-tutor-foreground;
   }
 
-  /* Student message styling */
   .message-student {
-    @apply bg-student text-student-foreground border border-student-border;
+    @apply bg-student text-student-foreground shadow-sm border border-student-border;
   }
 
-  /* Subject badges */
-  .badge-python {
-    background-color: hsl(var(--python-bg));
-    color: hsl(var(--python));
-  }
-
-  .badge-dsa {
-    background-color: hsl(var(--dsa-bg));
-    color: hsl(var(--dsa));
-  }
-
-  .badge-sql {
-    background-color: hsl(var(--sql-bg));
-    color: hsl(var(--sql));
-  }
-
-  /* Simple heading style */
-  .font-handwritten {
-    @apply font-semibold;
-  }
-
-  /* Code blocks */
   .code-block {
     font-family: 'JetBrains Mono', monospace;
-    @apply bg-muted/80 text-foreground rounded-lg p-3 text-sm overflow-x-auto;
+    @apply bg-muted text-foreground rounded-lg p-3 text-sm overflow-x-auto border;
   }
 
-  /* Notebook paper lines effect */
-  .notebook-lines {
-    background-image: repeating-linear-gradient(
-      transparent,
-      transparent 28px,
-      hsl(var(--border) / 0.3) 28px,
-      hsl(var(--border) / 0.3) 29px
-    );
+  .glass {
+    @apply bg-white/80 dark:bg-card/80 backdrop-blur-xl;
   }
 
-  /* Progress bar gradient */
-  .progress-gradient {
-    background: linear-gradient(
-      90deg,
-      hsl(var(--primary)) 0%,
-      hsl(var(--success)) 50%,
-      hsl(var(--accent-foreground)) 100%
-    );
-  }
-
-  /* Typing indicator animation */
   .typing-dot {
-    animation: typingBounce 1.4s infinite ease-in-out both;
+    animation: typingBounce 1.2s infinite ease-in-out both;
   }
 
-  .typing-dot:nth-child(1) {
-    animation-delay: -0.32s;
-  }
-
-  .typing-dot:nth-child(2) {
-    animation-delay: -0.16s;
-  }
+  .typing-dot:nth-child(1) { animation-delay: -0.3s; }
+  .typing-dot:nth-child(2) { animation-delay: -0.15s; }
 
   @keyframes typingBounce {
-    0%, 80%, 100% {
-      transform: translateY(0);
-    }
-    40% {
-      transform: translateY(-6px);
-    }
+    0%, 80%, 100% { transform: translateY(0); opacity: 0.4; }
+    40% { transform: translateY(-4px); opacity: 1; }
   }
 
-  /* Subtle float animation */
-  .float-subtle {
-    animation: floatSubtle 3s ease-in-out infinite;
-  }
-
-  @keyframes floatSubtle {
-    0%, 100% {
-      transform: translateY(0);
-    }
-    50% {
-      transform: translateY(-4px);
-    }
-  }
-
-  /* Fade in animation */
   .fade-in {
-    animation: fadeIn 0.3s ease-out forwards;
+    animation: fadeIn 0.2s ease-out forwards;
   }
 
   @keyframes fadeIn {
-    from {
-      opacity: 0;
-      transform: translateY(10px);
-    }
-    to {
-      opacity: 1;
-      transform: translateY(0);
-    }
+    from { opacity: 0; transform: translateY(8px); }
+    to { opacity: 1; transform: translateY(0); }
   }
 
-  /* Slide in from bottom */
   .slide-up {
-    animation: slideUp 0.4s ease-out forwards;
+    animation: slideUp 0.3s ease-out forwards;
   }
 
   @keyframes slideUp {
-    from {
-      opacity: 0;
-      transform: translateY(20px);
-    }
-    to {
-      opacity: 1;
-      transform: translateY(0);
-    }
+    from { opacity: 0; transform: translateY(16px); }
+    to { opacity: 1; transform: translateY(0); }
   }
 }
 
 @layer utilities {
-  .tutor-gradient {
-    background: linear-gradient(135deg, hsl(var(--tutor)) 0%, hsl(var(--secondary)) 100%);
-  }
-
-  .student-gradient {
-    background: linear-gradient(135deg, hsl(var(--student)) 0%, hsl(var(--accent)) 100%);
+  .font-handwritten {
+    @apply font-semibold;
   }
 }

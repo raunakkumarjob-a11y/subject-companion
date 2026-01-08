@@ -15,55 +15,51 @@ export function ProgressIndicator({ subject, progress, messagesCount }: Progress
   );
 
   return (
-    <div className="space-y-4">
-      <div className="flex items-center justify-between">
-        <h3 className="text-sm font-medium text-muted-foreground">Learning Journey</h3>
-        <span className="text-xs font-handwritten text-primary text-lg">
-          {Math.round(progress)}% Complete
-        </span>
+    <div className="space-y-3 pt-2 border-t">
+      <div className="flex items-center justify-between px-2">
+        <p className="text-xs font-medium text-muted-foreground">Progress</p>
+        <span className="text-xs font-medium text-primary">{Math.round(progress)}%</span>
       </div>
       
       {/* Progress bar */}
-      <div className="h-2 bg-muted rounded-full overflow-hidden">
+      <div className="h-1 bg-muted rounded-full overflow-hidden mx-2">
         <div
-          className="h-full progress-gradient rounded-full transition-all duration-500"
+          className="h-full bg-primary rounded-full transition-all duration-500"
           style={{ width: `${progress}%` }}
         />
       </div>
 
-      {/* Topic chips */}
-      <div className="flex flex-wrap gap-2">
-        {config.topics.map((topic, index) => {
-          const isActive = index === activeTopicIndex;
-          const isCompleted = index < activeTopicIndex;
-          
-          return (
+      {/* Current topic */}
+      <div className="px-2 space-y-1.5">
+        <p className="text-xs text-muted-foreground">Current topic</p>
+        <div className="flex flex-wrap gap-1">
+          {config.topics.slice(0, 4).map((topic, index) => (
             <span
               key={topic}
               className={cn(
-                "px-2 py-1 text-xs rounded-md transition-all duration-200",
-                isActive
-                  ? "bg-primary text-primary-foreground font-medium"
-                  : isCompleted
-                  ? "bg-success/20 text-success line-through"
+                "px-2 py-0.5 text-xs rounded-md",
+                index === activeTopicIndex
+                  ? "bg-primary text-primary-foreground"
+                  : index < activeTopicIndex
+                  ? "bg-success/20 text-success"
                   : "bg-muted text-muted-foreground"
               )}
             >
               {topic}
             </span>
-          );
-        })}
+          ))}
+        </div>
       </div>
 
       {/* Stats */}
-      <div className="grid grid-cols-2 gap-2 pt-2">
-        <div className="bg-card rounded-lg p-3 border">
-          <p className="text-xs text-muted-foreground">Questions Asked</p>
-          <p className="text-lg font-handwritten text-foreground">{Math.ceil(messagesCount / 2)}</p>
+      <div className="grid grid-cols-2 gap-2 px-2">
+        <div className="bg-muted/50 rounded-lg p-2">
+          <p className="text-[10px] text-muted-foreground">Questions</p>
+          <p className="text-sm font-medium">{Math.ceil(messagesCount / 2)}</p>
         </div>
-        <div className="bg-card rounded-lg p-3 border">
-          <p className="text-xs text-muted-foreground">Topics Explored</p>
-          <p className="text-lg font-handwritten text-foreground">{activeTopicIndex + 1}</p>
+        <div className="bg-muted/50 rounded-lg p-2">
+          <p className="text-[10px] text-muted-foreground">Topics</p>
+          <p className="text-sm font-medium">{activeTopicIndex + 1}</p>
         </div>
       </div>
     </div>

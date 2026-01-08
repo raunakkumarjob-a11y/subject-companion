@@ -1,5 +1,5 @@
 import { Subject, subjectConfig } from '@/types/chat';
-import { Button } from '@/components/ui/button';
+import { ArrowRight } from 'lucide-react';
 
 interface WelcomeMessageProps {
   subject: Subject;
@@ -11,82 +11,76 @@ export function WelcomeMessage({ subject, onStartConversation }: WelcomeMessageP
 
   const starterQuestions: Record<Subject, string[]> = {
     python: [
-      "What are variables and how do I use them?",
-      "Explain functions with a simple example",
-      "How do for loops work in Python?",
+      "What are variables?",
+      "Explain functions",
+      "How do loops work?",
     ],
     dsa: [
-      "What is Big O notation?",
-      "Explain arrays vs linked lists",
-      "How does binary search work?",
+      "What is Big O?",
+      "Arrays vs Linked Lists",
+      "Explain binary search",
     ],
     sql: [
-      "What is a SELECT statement?",
-      "How do JOINs work?",
-      "Explain primary and foreign keys",
+      "SELECT basics",
+      "How JOINs work",
+      "Primary keys",
     ],
     javascript: [
-      "What is the difference between let, const, and var?",
-      "How do Promises work?",
-      "Explain closures with an example",
+      "let vs const vs var",
+      "How Promises work",
+      "What are closures?",
     ],
     react: [
-      "What are components in React?",
-      "How does useState work?",
-      "Explain props vs state",
+      "What are components?",
+      "useState explained",
+      "Props vs State",
     ],
     'system-design': [
-      "How would you design a URL shortener?",
-      "What is horizontal vs vertical scaling?",
-      "Explain load balancing",
+      "URL shortener design",
+      "Scaling basics",
+      "Load balancing",
     ],
   };
 
   return (
     <div className="flex-1 flex items-center justify-center p-6">
-      <div className="max-w-md text-center space-y-6 slide-up">
-        {/* Tutor avatar */}
-        <div className="w-20 h-20 mx-auto rounded-2xl bg-primary/10 flex items-center justify-center float-subtle">
-          <span className="text-4xl">{config.icon}</span>
+      <div className="max-w-sm w-full slide-up">
+        {/* Icon */}
+        <div className="w-12 h-12 rounded-xl bg-primary/10 flex items-center justify-center mb-4">
+          <span className="text-2xl">{config.icon}</span>
         </div>
 
-        {/* Welcome text */}
+        {/* Title */}
+        <h1 className="text-xl font-semibold text-foreground mb-1">
+          {config.name}
+        </h1>
+        <p className="text-sm text-muted-foreground mb-6">
+          {config.description}
+        </p>
+
+        {/* Quick starts */}
         <div className="space-y-2">
-          <h2 className="text-xl font-medium text-foreground">
-            {config.name} Tutor
-          </h2>
-          <p className="text-sm text-muted-foreground">
-            {config.description}. Ask me anything!
-          </p>
+          <p className="text-xs font-medium text-muted-foreground mb-2">Try asking</p>
+          {starterQuestions[subject].map((question) => (
+            <button
+              key={question}
+              onClick={() => onStartConversation(question)}
+              className="w-full flex items-center justify-between px-3 py-2.5 rounded-lg bg-card border hover:bg-accent hover:border-primary/20 transition-colors text-left group"
+            >
+              <span className="text-sm text-foreground">{question}</span>
+              <ArrowRight className="w-3.5 h-3.5 text-muted-foreground group-hover:text-primary transition-colors" />
+            </button>
+          ))}
         </div>
 
-        {/* Quick start topics */}
-        <div className="space-y-3">
-          <p className="text-sm font-medium text-muted-foreground">
-            Not sure where to start? Try these:
-          </p>
-          <div className="flex flex-col gap-2">
-            {starterQuestions[subject].map((question) => (
-              <Button
-                key={question}
-                variant="tutor"
-                onClick={() => onStartConversation(question)}
-                className="w-full justify-start text-left h-auto py-3 px-4"
-              >
-                {question}
-              </Button>
-            ))}
-          </div>
-        </div>
-
-        {/* Topics preview */}
-        <div className="pt-4">
-          <p className="text-xs text-muted-foreground mb-2">Topics we can cover:</p>
-          <div className="flex flex-wrap justify-center gap-2">
-            {config.topics.map((topic) => (
+        {/* Topics */}
+        <div className="mt-6 pt-4 border-t">
+          <p className="text-xs text-muted-foreground mb-2">Topics covered</p>
+          <div className="flex flex-wrap gap-1.5">
+            {config.topics.slice(0, 5).map((topic) => (
               <span
                 key={topic}
-                className="px-3 py-1 text-xs rounded-full bg-muted text-muted-foreground"
+                className="px-2 py-0.5 text-xs rounded-md bg-muted text-muted-foreground"
               >
                 {topic}
               </span>
