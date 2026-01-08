@@ -8,6 +8,7 @@ import { WelcomeMessage } from '@/components/chat/WelcomeMessage';
 import { subjectConfig } from '@/types/chat';
 import { Menu, Sparkles } from 'lucide-react';
 import { Button } from '@/components/ui/button';
+import { ThemeToggle } from '@/components/ThemeToggle';
 
 const Index = () => {
   const {
@@ -61,14 +62,15 @@ const Index = () => {
             <span className="font-medium text-foreground text-sm">{config.name}</span>
           </div>
 
-          {messages.length > 0 && (
-            <div className="flex items-center gap-2">
+          <div className="flex items-center gap-2">
+            {messages.length > 0 && (
               <div className="flex items-center gap-1.5 px-2 py-1 rounded-full bg-primary/5">
                 <Sparkles className="w-3 h-3 text-primary" />
                 <span className="text-xs font-medium text-primary">{Math.round(progress)}%</span>
               </div>
-            </div>
-          )}
+            )}
+            <ThemeToggle />
+          </div>
         </header>
 
         {/* Chat area */}
