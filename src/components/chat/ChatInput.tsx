@@ -1,6 +1,6 @@
 import { useState, useRef, useEffect } from 'react';
 import { Button } from '@/components/ui/button';
-import { Send, RefreshCw, Lightbulb, HelpCircle } from 'lucide-react';
+import { Send, RotateCcw, Zap, BookOpen } from 'lucide-react';
 import { Subject, subjectConfig } from '@/types/chat';
 import { cn } from '@/lib/utils';
 
@@ -39,89 +39,75 @@ export function ChatInput({
     }
   };
 
-  // Auto-resize textarea
   useEffect(() => {
     if (textareaRef.current) {
       textareaRef.current.style.height = 'auto';
-      textareaRef.current.style.height = `${Math.min(textareaRef.current.scrollHeight, 150)}px`;
+      textareaRef.current.style.height = `${Math.min(textareaRef.current.scrollHeight, 120)}px`;
     }
   }, [input]);
 
   const config = subjectConfig[subject];
-  const placeholder = `Ask me about ${config.name}... (e.g., "Explain ${config.topics[0]}")`;
 
   return (
-    <div className="border-t bg-card/80 backdrop-blur-sm p-4">
-      {/* Quick action buttons */}
+    <div className="border-t glass p-3">
+      {/* Quick actions */}
       {hasMessages && (
-        <div className="flex gap-2 mb-3 flex-wrap">
-          <Button
-            variant="reexplain"
-            size="action"
+        <div className="flex gap-1.5 mb-2">
+          <button
             onClick={onReexplain}
             disabled={isLoading}
-            className="gap-1.5"
+            className="flex items-center gap-1.5 px-2.5 py-1.5 text-xs rounded-md bg-muted hover:bg-accent transition-colors disabled:opacity-50"
           >
-            <RefreshCw className="w-3.5 h-3.5" />
+            <RotateCcw className="w-3 h-3" />
             Re-explain
-          </Button>
-          <Button
-            variant="quiz"
-            size="action"
+          </button>
+          <button
             onClick={onQuiz}
             disabled={isLoading}
-            className="gap-1.5"
+            className="flex items-center gap-1.5 px-2.5 py-1.5 text-xs rounded-md bg-success/10 text-success hover:bg-success/20 transition-colors disabled:opacity-50"
           >
-            <Lightbulb className="w-3.5 h-3.5" />
-            Quick Quiz
-          </Button>
-          <Button
-            variant="outline"
-            size="action"
-            onClick={() => onSendMessage("Give me a real-world example")}
+            <Zap className="w-3 h-3" />
+            Quiz me
+          </button>
+          <button
+            onClick={() => onSendMessage("Give me a real example")}
             disabled={isLoading}
-            className="gap-1.5"
+            className="flex items-center gap-1.5 px-2.5 py-1.5 text-xs rounded-md bg-muted hover:bg-accent transition-colors disabled:opacity-50"
           >
-            <HelpCircle className="w-3.5 h-3.5" />
-            Real Example
-          </Button>
+            <BookOpen className="w-3 h-3" />
+            Example
+          </button>
         </div>
       )}
 
-      {/* Input form */}
+      {/* Input */}
       <form onSubmit={handleSubmit} className="flex gap-2 items-end">
-        <div className="flex-1 relative">
+        <div className="flex-1">
           <textarea
             ref={textareaRef}
             value={input}
             onChange={(e) => setInput(e.target.value)}
             onKeyDown={handleKeyDown}
-            placeholder={placeholder}
+            placeholder={`Ask about ${config.name}...`}
             disabled={isLoading}
             rows={1}
             className={cn(
-              "w-full resize-none rounded-xl border-2 bg-background px-4 py-3",
+              "w-full resize-none rounded-lg border bg-background px-3 py-2.5 text-sm",
               "placeholder:text-muted-foreground/60",
-              "focus:outline-none focus:ring-2 focus:ring-ring focus:border-primary",
-              "disabled:opacity-50 disabled:cursor-not-allowed",
-              "transition-all duration-200"
+              "focus:outline-none focus:ring-1 focus:ring-primary focus:border-primary",
+              "disabled:opacity-50"
             )}
           />
         </div>
         <Button
           type="submit"
-          variant="action"
-          size="lg"
+          size="icon"
           disabled={!input.trim() || isLoading}
-          className="shrink-0"
+          className="h-10 w-10 shrink-0"
         >
-          <Send className="w-5 h-5" />
+          <Send className="w-4 h-4" />
         </Button>
       </form>
-
-      <p className="text-xs text-muted-foreground text-center mt-3">
-        Press Enter to send, Shift+Enter for new line
-      </p>
     </div>
   );
 }

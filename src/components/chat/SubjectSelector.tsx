@@ -1,5 +1,6 @@
 import { Subject, subjectConfig } from '@/types/chat';
 import { cn } from '@/lib/utils';
+import { Check } from 'lucide-react';
 
 interface SubjectSelectorProps {
   currentSubject: Subject;
@@ -8,57 +9,35 @@ interface SubjectSelectorProps {
 
 export function SubjectSelector({ currentSubject, onSelectSubject }: SubjectSelectorProps) {
   return (
-    <div className="flex flex-col gap-2">
-      <h3 className="text-sm font-medium text-muted-foreground px-1">Choose Your Subject</h3>
-      <div className="flex flex-col gap-2">
-        {(Object.keys(subjectConfig) as Subject[]).map((subject) => {
-          const config = subjectConfig[subject];
-          const isActive = currentSubject === subject;
-          
-          return (
-            <button
-              key={subject}
-              onClick={() => onSelectSubject(subject)}
-              className={cn(
-                "flex items-center gap-3 p-3 rounded-xl transition-all duration-200 text-left",
-                "border-2 hover:shadow-md",
-                isActive
-                  ? subject === 'python'
-                    ? "bg-python-bg border-python/40 shadow-md"
-                    : subject === 'dsa'
-                    ? "bg-dsa-bg border-dsa/40 shadow-md"
-                    : "bg-sql-bg border-sql/40 shadow-md"
-                  : "bg-card border-border hover:border-primary/30"
-              )}
-            >
-              <span className="text-2xl">{config.icon}</span>
-              <div className="flex-1 min-w-0">
-                <p className={cn(
-                  "font-semibold text-sm truncate",
-                  isActive
-                    ? subject === 'python'
-                      ? "text-python"
-                      : subject === 'dsa'
-                      ? "text-dsa"
-                      : "text-sql"
-                    : "text-foreground"
-                )}>
-                  {config.name}
-                </p>
-                <p className="text-xs text-muted-foreground truncate">
-                  {config.topics.slice(0, 3).join(' • ')}
-                </p>
-              </div>
-              {isActive && (
-                <div className={cn(
-                  "w-2 h-2 rounded-full",
-                  subject === 'python' ? "bg-python" : subject === 'dsa' ? "bg-dsa" : "bg-sql"
-                )} />
-              )}
-            </button>
-          );
-        })}
-      </div>
+    <div className="space-y-1.5">
+      <p className="text-xs font-medium text-muted-foreground px-2 mb-2">Subjects</p>
+      {(Object.keys(subjectConfig) as Subject[]).map((subject) => {
+        const config = subjectConfig[subject];
+        const isActive = currentSubject === subject;
+        
+        return (
+          <button
+            key={subject}
+            onClick={() => onSelectSubject(subject)}
+            className={cn(
+              "w-full flex items-center gap-2.5 px-2.5 py-2 rounded-lg transition-all text-left",
+              "hover:bg-accent",
+              isActive && "bg-primary/10"
+            )}
+          >
+            <span className="text-lg">{config.icon}</span>
+            <span className={cn(
+              "flex-1 text-sm",
+              isActive ? "font-medium text-foreground" : "text-muted-foreground"
+            )}>
+              {config.name}
+            </span>
+            {isActive && (
+              <Check className="w-3.5 h-3.5 text-primary" />
+            )}
+          </button>
+        );
+      })}
     </div>
   );
 }
