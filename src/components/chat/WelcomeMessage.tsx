@@ -52,11 +52,11 @@ export function WelcomeMessage({ subject, onStartConversation }: WelcomeMessageP
 
         {/* Welcome text */}
         <div className="space-y-2">
-          <h2 className="text-2xl font-handwritten text-foreground">
-            Hello! I'm your {config.name} Tutor 👋
+          <h2 className="text-xl font-medium text-foreground">
+            {config.name} Tutor
           </h2>
-          <p className="text-muted-foreground">
-            {config.description}. Ask me anything and I'll explain it step by step!
+          <p className="text-sm text-muted-foreground">
+            {config.description}. Ask me anything!
           </p>
         </div>
 
