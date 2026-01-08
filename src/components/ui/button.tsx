@@ -15,7 +15,7 @@ const buttonVariants = cva(
         secondary: "bg-secondary text-secondary-foreground hover:bg-secondary/80",
         ghost: "hover:bg-accent hover:text-accent-foreground",
         link: "text-primary underline-offset-4 hover:underline",
-        tutor: "bg-tutor text-tutor-foreground border-2 border-tutor-border hover:bg-tutor/80 hover:shadow-tutor font-handwritten text-base",
+        tutor: "bg-tutor text-tutor-foreground border-2 border-tutor-border hover:bg-tutor/80 hover:shadow-tutor",
         action: "bg-gradient-to-r from-primary to-primary/80 text-primary-foreground shadow-warm hover:shadow-lg hover:-translate-y-0.5",
         quiz: "bg-success text-success-foreground hover:bg-success/90 shadow-md hover:shadow-lg hover:-translate-y-0.5",
         reexplain: "bg-accent text-accent-foreground border-2 border-accent-foreground/20 hover:bg-accent/80",
