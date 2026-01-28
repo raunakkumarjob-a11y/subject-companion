@@ -33,21 +33,46 @@ export function MessageBubble({ message }: MessageBubbleProps) {
         );
       }
       
-      const inlineParts = part.split(/(`[^`]+`)/g);
+      // Process inline formatting: bold, italic, inline code
       return (
         <span key={index}>
-          {inlineParts.map((inline, i) => {
-            if (inline.startsWith('`') && inline.endsWith('`')) {
-              return (
-                <code key={i} className="px-1 py-0.5 bg-muted rounded text-xs font-mono">
-                  {inline.slice(1, -1)}
-                </code>
-              );
-            }
-            return <span key={i}>{inline}</span>;
-          })}
+          {formatInlineText(part)}
         </span>
       );
+    });
+  };
+
+  const formatInlineText = (text: string) => {
+    // Split by bold (**text**), italic (*text*), and inline code (`text`)
+    const regex = /(\*\*[^*]+\*\*|\*[^*]+\*|`[^`]+`)/g;
+    const parts = text.split(regex);
+
+    return parts.map((part, i) => {
+      // Bold text
+      if (part.startsWith('**') && part.endsWith('**')) {
+        return (
+          <strong key={i} className="font-semibold">
+            {part.slice(2, -2)}
+          </strong>
+        );
+      }
+      // Italic text (single asterisk, but not bold)
+      if (part.startsWith('*') && part.endsWith('*') && !part.startsWith('**')) {
+        return (
+          <em key={i} className="italic">
+            {part.slice(1, -1)}
+          </em>
+        );
+      }
+      // Inline code
+      if (part.startsWith('`') && part.endsWith('`')) {
+        return (
+          <code key={i} className="px-1 py-0.5 bg-muted rounded text-xs font-mono">
+            {part.slice(1, -1)}
+          </code>
+        );
+      }
+      return <span key={i}>{part}</span>;
     });
   };
 
