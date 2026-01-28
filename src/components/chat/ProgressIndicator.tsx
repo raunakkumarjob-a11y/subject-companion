@@ -1,4 +1,4 @@
-import { Subject, subjectConfig } from '@/types/chat';
+import { Subject, getSubjectConfig } from '@/types/chat';
 import { cn } from '@/lib/utils';
 
 interface ProgressIndicatorProps {
@@ -8,7 +8,7 @@ interface ProgressIndicatorProps {
 }
 
 export function ProgressIndicator({ subject, progress, messagesCount }: ProgressIndicatorProps) {
-  const config = subjectConfig[subject];
+  const config = getSubjectConfig(subject);
   const activeTopicIndex = Math.min(
     Math.floor((messagesCount / 4) % config.topics.length),
     config.topics.length - 1

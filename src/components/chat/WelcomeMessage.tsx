@@ -1,46 +1,79 @@
-import { Subject, subjectConfig } from '@/types/chat';
-import { ArrowRight } from 'lucide-react';
+import { Subject, getSubjectConfig } from '@/types/chat';
+import { PrepSettings as PrepSettingsType } from '@/types/chat';
+import { ArrowRight, Sparkles, Target, BookOpen } from 'lucide-react';
 
 interface WelcomeMessageProps {
   subject: Subject;
+  prepSettings: PrepSettingsType | null;
   onStartConversation: (topic: string) => void;
 }
 
-export function WelcomeMessage({ subject, onStartConversation }: WelcomeMessageProps) {
-  const config = subjectConfig[subject];
+const allStarterQuestions: Record<string, string[]> = {
+  python: [
+    "What are variables?",
+    "Explain functions",
+    "How do loops work?",
+  ],
+  dsa: [
+    "What is Big O?",
+    "Arrays vs Linked Lists",
+    "Explain binary search",
+  ],
+  sql: [
+    "SELECT basics",
+    "How JOINs work",
+    "Primary keys",
+  ],
+  javascript: [
+    "let vs const vs var",
+    "How Promises work",
+    "What are closures?",
+  ],
+  react: [
+    "What are components?",
+    "useState explained",
+    "Props vs State",
+  ],
+  'system-design': [
+    "URL shortener design",
+    "Scaling basics",
+    "Load balancing",
+  ],
+  physics: [
+    "Newton's laws",
+    "What is momentum?",
+    "Explain thermodynamics",
+  ],
+  chemistry: [
+    "Periodic table basics",
+    "Chemical bonding",
+    "Acids and bases",
+  ],
+  biology: [
+    "Cell structure",
+    "DNA basics",
+    "Evolution explained",
+  ],
+  mathematics: [
+    "Algebra fundamentals",
+    "Derivatives explained",
+    "Probability basics",
+  ],
+  history: [
+    "World War overview",
+    "Ancient civilizations",
+    "Industrial revolution",
+  ],
+  geography: [
+    "Plate tectonics",
+    "Climate zones",
+    "Human geography",
+  ],
+};
 
-  const starterQuestions: Record<Subject, string[]> = {
-    python: [
-      "What are variables?",
-      "Explain functions",
-      "How do loops work?",
-    ],
-    dsa: [
-      "What is Big O?",
-      "Arrays vs Linked Lists",
-      "Explain binary search",
-    ],
-    sql: [
-      "SELECT basics",
-      "How JOINs work",
-      "Primary keys",
-    ],
-    javascript: [
-      "let vs const vs var",
-      "How Promises work",
-      "What are closures?",
-    ],
-    react: [
-      "What are components?",
-      "useState explained",
-      "Props vs State",
-    ],
-    'system-design': [
-      "URL shortener design",
-      "Scaling basics",
-      "Load balancing",
-    ],
-  };
+export function WelcomeMessage({ subject, prepSettings, onStartConversation }: WelcomeMessageProps) {
+  const config = getSubjectConfig(subject);
+  const starterQuestions = allStarterQuestions[subject] || ["Ask me anything!"];
 
   return (
     <div className="flex-1 flex items-center justify-center p-6">
@@ -54,14 +87,32 @@ export function WelcomeMessage({ subject, onStartConversation }: WelcomeMessageP
         <h1 className="text-xl font-semibold text-foreground mb-1">
           {config.name}
         </h1>
-        <p className="text-sm text-muted-foreground mb-6">
+        <p className="text-sm text-muted-foreground mb-4">
           {config.description}
         </p>
+
+        {/* Prep Settings Summary */}
+        {prepSettings && (
+          <div className="mb-6 p-3 rounded-lg bg-primary/5 border border-primary/20 space-y-2">
+            <div className="flex items-center gap-2 text-xs text-muted-foreground">
+              <Sparkles className="w-3 h-3" />
+              <span className="capitalize">{prepSettings.difficulty} level</span>
+            </div>
+            <div className="flex items-center gap-2 text-xs text-muted-foreground">
+              <Target className="w-3 h-3" />
+              <span>Focus: {prepSettings.focusArea}</span>
+            </div>
+            <div className="flex items-center gap-2 text-xs text-muted-foreground">
+              <BookOpen className="w-3 h-3" />
+              <span className="capitalize">{prepSettings.sessionGoal}</span>
+            </div>
+          </div>
+        )}
 
         {/* Quick starts */}
         <div className="space-y-2">
           <p className="text-xs font-medium text-muted-foreground mb-2">Try asking</p>
-          {starterQuestions[subject].map((question) => (
+          {starterQuestions.map((question) => (
             <button
               key={question}
               onClick={() => onStartConversation(question)}
