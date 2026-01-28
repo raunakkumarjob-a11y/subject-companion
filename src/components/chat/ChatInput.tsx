@@ -1,7 +1,7 @@
 import { useState, useRef, useEffect } from 'react';
 import { Button } from '@/components/ui/button';
 import { Send, RotateCcw, Zap, BookOpen } from 'lucide-react';
-import { Subject, subjectConfig } from '@/types/chat';
+import { Subject, getSubjectConfig } from '@/types/chat';
 import { cn } from '@/lib/utils';
 
 interface ChatInputProps {
@@ -46,7 +46,7 @@ export function ChatInput({
     }
   }, [input]);
 
-  const config = subjectConfig[subject];
+  const config = getSubjectConfig(subject);
 
   return (
     <div className="border-t glass p-3">

@@ -1,5 +1,5 @@
 import { useState, useCallback } from 'react';
-import { Message, Subject, ChatState } from '@/types/chat';
+import { Message, Subject, Field, ChatState, PrepSettings } from '@/types/chat';
 import { supabase } from '@/integrations/supabase/client';
 
 const generateId = () => Math.random().toString(36).substring(2, 9);
@@ -7,15 +7,65 @@ const generateId = () => Math.random().toString(36).substring(2, 9);
 export function useChatStore() {
   const [state, setState] = useState<ChatState>({
     messages: [],
-    subject: 'python',
+    field: null,
+    subject: null,
+    prepSettings: null,
     isLoading: false,
     progress: 0,
   });
+
+  const setField = useCallback((field: Field) => {
+    setState((prev) => ({
+      ...prev,
+      field,
+      subject: null,
+      prepSettings: null,
+      messages: [],
+      progress: 0,
+    }));
+  }, []);
 
   const setSubject = useCallback((subject: Subject) => {
     setState((prev) => ({
       ...prev,
       subject,
+      messages: [],
+      progress: 0,
+    }));
+  }, []);
+
+  const setPrepSettings = useCallback((prepSettings: PrepSettings) => {
+    setState((prev) => ({
+      ...prev,
+      prepSettings,
+    }));
+  }, []);
+
+  const resetToFieldSelection = useCallback(() => {
+    setState({
+      messages: [],
+      field: null,
+      subject: null,
+      prepSettings: null,
+      isLoading: false,
+      progress: 0,
+    });
+  }, []);
+
+  const resetToSubjectSelection = useCallback(() => {
+    setState((prev) => ({
+      ...prev,
+      subject: null,
+      prepSettings: null,
+      messages: [],
+      progress: 0,
+    }));
+  }, []);
+
+  const resetToPrepSettings = useCallback(() => {
+    setState((prev) => ({
+      ...prev,
+      prepSettings: null,
       messages: [],
       progress: 0,
     }));
@@ -55,6 +105,7 @@ export function useChatStore() {
             content: m.content,
           })),
           subject: state.subject,
+          prepSettings: state.prepSettings,
         },
       });
 
@@ -71,7 +122,7 @@ export function useChatStore() {
     } finally {
       setState((prev) => ({ ...prev, isLoading: false }));
     }
-  }, [state.messages, state.subject, addMessage]);
+  }, [state.messages, state.subject, state.prepSettings, addMessage]);
 
   const requestReexplain = useCallback(async () => {
     const lastAssistantMessage = [...state.messages]
@@ -97,7 +148,12 @@ export function useChatStore() {
 
   return {
     ...state,
+    setField,
     setSubject,
+    setPrepSettings,
+    resetToFieldSelection,
+    resetToSubjectSelection,
+    resetToPrepSettings,
     sendMessage,
     requestReexplain,
     requestQuiz,
