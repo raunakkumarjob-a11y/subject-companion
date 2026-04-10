@@ -50,7 +50,6 @@ export function ChatInput({
 
   return (
     <div className="border-t glass p-3">
-      {/* Quick actions */}
       {hasMessages && (
         <div className="flex gap-1.5 mb-2">
           <button
@@ -64,13 +63,13 @@ export function ChatInput({
           <button
             onClick={onQuiz}
             disabled={isLoading}
-            className="flex items-center gap-1.5 px-2.5 py-1.5 text-xs rounded-md bg-success/10 text-success hover:bg-success/20 transition-colors disabled:opacity-50"
+            className="flex items-center gap-1.5 px-2.5 py-1.5 text-xs rounded-md bg-primary/10 text-primary hover:bg-primary/20 transition-colors disabled:opacity-50"
           >
             <Zap className="w-3 h-3" />
             Quiz me
           </button>
           <button
-            onClick={() => onSendMessage("Give me a real example")}
+            onClick={() => onSendMessage("Give me a real example with exam context")}
             disabled={isLoading}
             className="flex items-center gap-1.5 px-2.5 py-1.5 text-xs rounded-md bg-muted hover:bg-accent transition-colors disabled:opacity-50"
           >
@@ -80,7 +79,6 @@ export function ChatInput({
         </div>
       )}
 
-      {/* Input */}
       <form onSubmit={handleSubmit} className="flex gap-2 items-end">
         <div className="flex-1">
           <textarea

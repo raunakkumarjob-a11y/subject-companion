@@ -5,7 +5,6 @@ import { MessageBubble } from '@/components/chat/MessageBubble';
 import { TypingIndicator } from '@/components/chat/TypingIndicator';
 import { ChatInput } from '@/components/chat/ChatInput';
 import { WelcomeMessage } from '@/components/chat/WelcomeMessage';
-import { FieldSelector } from '@/components/chat/FieldSelector';
 import { SubjectGrid } from '@/components/chat/SubjectGrid';
 import { PrepSettings } from '@/components/chat/PrepSettings';
 import { getSubjectConfig } from '@/types/chat';
@@ -16,15 +15,12 @@ import { ThemeToggle } from '@/components/ThemeToggle';
 const Index = () => {
   const {
     messages,
-    field,
     subject,
     prepSettings,
     isLoading,
     progress,
-    setField,
     setSubject,
     setPrepSettings,
-    resetToFieldSelection,
     resetToSubjectSelection,
     resetToPrepSettings,
     sendMessage,
@@ -41,42 +37,33 @@ const Index = () => {
     messagesEndRef.current?.scrollIntoView({ behavior: 'smooth' });
   }, [messages, isLoading]);
 
-  // Step 1: No field selected - show field selector
-  if (!field) {
-    return (
-      <div className="min-h-screen bg-background">
-        <header className="h-14 glass border-b flex items-center justify-between px-4">
-          <span className="font-semibold text-foreground">Tutor</span>
-          <ThemeToggle />
-        </header>
-        <FieldSelector onSelectField={setField} />
-      </div>
-    );
-  }
-
-  // Step 2: Field selected but no subject - show subject grid
+  // Step 1: No subject selected - show subject grid directly
   if (!subject) {
     return (
       <div className="min-h-screen bg-background">
         <header className="h-14 glass border-b flex items-center justify-between px-4">
-          <span className="font-semibold text-foreground">Tutor</span>
+          <div className="flex items-center gap-2">
+            <span className="text-lg">💻</span>
+            <span className="font-semibold text-foreground">Tech Tutor</span>
+          </div>
           <ThemeToggle />
         </header>
         <SubjectGrid
-          field={field}
           onSelectSubject={setSubject}
-          onBack={resetToFieldSelection}
         />
       </div>
     );
   }
 
-  // Step 3: Subject selected but no prep settings - show prep settings
+  // Step 2: Subject selected but no prep settings
   if (!prepSettings) {
     return (
       <div className="min-h-screen bg-background">
         <header className="h-14 glass border-b flex items-center justify-between px-4">
-          <span className="font-semibold text-foreground">Tutor</span>
+          <div className="flex items-center gap-2">
+            <span className="text-lg">💻</span>
+            <span className="font-semibold text-foreground">Tech Tutor</span>
+          </div>
           <ThemeToggle />
         </header>
         <PrepSettings
@@ -88,23 +75,21 @@ const Index = () => {
     );
   }
 
-  // Step 4: All set - show chat interface
+  // Step 3: All set - show chat interface
   return (
     <div className="flex h-screen bg-background overflow-hidden">
       <Sidebar
-        field={field}
         subject={subject}
         onSelectSubject={setSubject}
         progress={progress}
         messagesCount={messages.length}
         onClearChat={clearChat}
-        onChangeField={resetToFieldSelection}
+        onChangeSubject={resetToSubjectSelection}
         isOpen={sidebarOpen}
         onClose={() => setSidebarOpen(false)}
       />
 
       <main className="flex-1 flex flex-col min-w-0">
-        {/* Minimal header */}
         <header className="h-14 glass border-b flex items-center px-4 gap-3 shrink-0">
           <Button
             variant="ghost"
@@ -128,7 +113,7 @@ const Index = () => {
           <div className="flex items-center gap-2 flex-1">
             {config && (
               <>
-                <div className="w-8 h-8 rounded-lg bg-primary/10 flex items-center justify-center">
+                <div className={`w-8 h-8 rounded-lg bg-gradient-to-br ${config.color} flex items-center justify-center`}>
                   <span className="text-base">{config.icon}</span>
                 </div>
                 <span className="font-medium text-foreground text-sm">{config.name}</span>
@@ -147,7 +132,6 @@ const Index = () => {
           </div>
         </header>
 
-        {/* Chat area */}
         <div className="flex-1 overflow-y-auto">
           {messages.length === 0 ? (
             <WelcomeMessage
@@ -156,7 +140,7 @@ const Index = () => {
               onStartConversation={sendMessage}
             />
           ) : (
-            <div className="max-w-2xl mx-auto p-4 space-y-3">
+            <div className="max-w-3xl mx-auto p-4 space-y-3">
               {messages.map((message) => (
                 <MessageBubble
                   key={message.id}

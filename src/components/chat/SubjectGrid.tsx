@@ -1,39 +1,29 @@
-import { Field, Subject, TechSubject, NonTechSubject, techSubjects, nonTechSubjects } from '@/types/chat';
+import { Subject, subjectConfig } from '@/types/chat';
 import { cn } from '@/lib/utils';
-import { ArrowLeft, ArrowRight } from 'lucide-react';
+import { ArrowRight } from 'lucide-react';
 
 interface SubjectGridProps {
-  field: Field;
   onSelectSubject: (subject: Subject) => void;
-  onBack: () => void;
 }
 
-export function SubjectGrid({ field, onSelectSubject, onBack }: SubjectGridProps) {
-  const subjects = field === 'tech' ? techSubjects : nonTechSubjects;
-  const subjectKeys = Object.keys(subjects) as (TechSubject | NonTechSubject)[];
+export function SubjectGrid({ onSelectSubject }: SubjectGridProps) {
+  const subjectKeys = Object.keys(subjectConfig) as Subject[];
 
   return (
     <div className="flex flex-col min-h-[60vh] p-6">
-      <button
-        onClick={onBack}
-        className="flex items-center gap-2 text-muted-foreground hover:text-foreground transition-colors mb-6 self-start"
-      >
-        <ArrowLeft className="w-4 h-4" />
-        <span className="text-sm">Back to field selection</span>
-      </button>
-
       <div className="text-center mb-8 slide-up">
+        <span className="text-4xl mb-3 block">💻</span>
         <h2 className="text-xl md:text-2xl font-bold text-foreground mb-2">
-          Select a Subject
+          Choose Your Subject
         </h2>
         <p className="text-muted-foreground text-sm">
-          {field === 'tech' ? 'Technical subjects for your prep' : 'Non-technical subjects to explore'}
+          Select a technical subject to start learning
         </p>
       </div>
 
       <div className="grid grid-cols-1 sm:grid-cols-2 lg:grid-cols-3 gap-4 max-w-4xl mx-auto w-full">
         {subjectKeys.map((subjectKey, index) => {
-          const config = subjects[subjectKey];
+          const config = subjectConfig[subjectKey];
           
           return (
             <button
@@ -50,7 +40,9 @@ export function SubjectGrid({ field, onSelectSubject, onBack }: SubjectGridProps
             >
               <div className="flex items-start justify-between">
                 <div className="flex-1">
-                  <span className="text-3xl mb-2 block">{config.icon}</span>
+                  <div className={`w-10 h-10 rounded-lg bg-gradient-to-br ${config.color} flex items-center justify-center mb-2`}>
+                    <span className="text-xl">{config.icon}</span>
+                  </div>
                   <h3 className="text-base font-semibold text-foreground mb-1">
                     {config.name}
                   </h3>
@@ -62,14 +54,19 @@ export function SubjectGrid({ field, onSelectSubject, onBack }: SubjectGridProps
               </div>
               
               <div className="flex flex-wrap gap-1 mt-3">
-                {config.topics.slice(0, 3).map((topic) => (
+                {config.exams.slice(0, 3).map((exam) => (
                   <span
-                    key={topic}
-                    className="px-2 py-0.5 rounded-full bg-muted text-muted-foreground text-[10px]"
+                    key={exam}
+                    className="px-2 py-0.5 rounded-full bg-primary/10 text-primary text-[10px] font-medium"
                   >
-                    {topic}
+                    {exam}
                   </span>
                 ))}
+                {config.exams.length > 3 && (
+                  <span className="px-2 py-0.5 rounded-full bg-muted text-muted-foreground text-[10px]">
+                    +{config.exams.length - 3} more
+                  </span>
+                )}
               </div>
             </button>
           );

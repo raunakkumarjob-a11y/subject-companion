@@ -48,7 +48,9 @@ export function PrepSettings({ subject, onBack, onComplete }: PrepSettingsProps)
 
       <div className="flex-1 max-w-2xl mx-auto w-full space-y-8">
         <div className="text-center slide-up">
-          <span className="text-4xl mb-3 block">{config.icon}</span>
+          <div className={`w-14 h-14 rounded-xl bg-gradient-to-br ${config.color} flex items-center justify-center mx-auto mb-3`}>
+            <span className="text-3xl">{config.icon}</span>
+          </div>
           <h2 className="text-xl font-bold text-foreground">{config.name}</h2>
           <p className="text-sm text-muted-foreground mt-1">Customize your learning session</p>
         </div>
@@ -124,7 +126,6 @@ export function PrepSettings({ subject, onBack, onComplete }: PrepSettingsProps)
           </div>
         </div>
 
-        {/* Start Button */}
         <Button
           onClick={handleStart}
           size="lg"

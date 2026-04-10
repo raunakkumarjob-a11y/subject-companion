@@ -1,22 +1,20 @@
-import { Field, Subject, TechSubject, NonTechSubject, techSubjects, nonTechSubjects } from '@/types/chat';
+import { Subject, subjectConfig } from '@/types/chat';
 import { cn } from '@/lib/utils';
 import { Check } from 'lucide-react';
 
 interface SubjectSelectorProps {
-  field: Field;
   currentSubject: Subject;
   onSelectSubject: (subject: Subject) => void;
 }
 
-export function SubjectSelector({ field, currentSubject, onSelectSubject }: SubjectSelectorProps) {
-  const subjects = field === 'tech' ? techSubjects : nonTechSubjects;
-  const subjectKeys = Object.keys(subjects) as (TechSubject | NonTechSubject)[];
+export function SubjectSelector({ currentSubject, onSelectSubject }: SubjectSelectorProps) {
+  const subjectKeys = Object.keys(subjectConfig) as Subject[];
 
   return (
     <div className="space-y-1.5">
       <p className="text-xs font-medium text-muted-foreground px-2 mb-2">Subjects</p>
       {subjectKeys.map((subjectKey) => {
-        const config = subjects[subjectKey];
+        const config = subjectConfig[subjectKey];
         const isActive = currentSubject === subjectKey;
         
         return (

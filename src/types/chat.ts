@@ -1,8 +1,4 @@
-export type Field = 'tech' | 'non-tech';
-
-export type TechSubject = 'python' | 'dsa' | 'sql' | 'javascript' | 'react' | 'system-design' | 'computer-science';
-export type NonTechSubject = 'physics' | 'chemistry' | 'biology' | 'mathematics' | 'history' | 'geography' | 'english' | 'economics' | 'general-knowledge';
-export type Subject = TechSubject | NonTechSubject;
+export type Subject = 'python' | 'dsa' | 'sql' | 'javascript' | 'react' | 'system-design' | 'computer-science';
 
 export interface Message {
   id: string;
@@ -19,165 +15,78 @@ export interface PrepSettings {
 
 export interface ChatState {
   messages: Message[];
-  field: Field | null;
   subject: Subject | null;
   prepSettings: PrepSettings | null;
   isLoading: boolean;
   progress: number;
 }
 
-export const fieldConfig: Record<Field, {
+export const subjectConfig: Record<Subject, {
   name: string;
   icon: string;
   description: string;
-}> = {
-  tech: {
-    name: 'Technical',
-    icon: '💻',
-    description: 'Programming, DSA, System Design & more',
-  },
-  'non-tech': {
-    name: 'Non-Technical',
-    icon: '📚',
-    description: 'Physics, Chemistry, Biology & more',
-  },
-};
-
-export const techSubjects: Record<TechSubject, {
-  name: string;
-  icon: string;
-  description: string;
+  color: string;
   topics: string[];
   exams: string[];
 }> = {
   python: {
     name: 'Python',
     icon: '🐍',
-    description: 'NICET, GAT, TCS NQT, Infosys के लिए Python programming',
-    topics: ['Variables', 'Functions', 'Loops', 'OOP', 'Data Structures', 'File Handling'],
-    exams: ['NICET', 'GAT', 'TCS NQT', 'Infosys', 'Wipro'],
+    description: 'Master Python for NICET, GAT, TCS NQT, Infosys & coding interviews',
+    color: 'from-blue-500 to-cyan-500',
+    topics: ['Variables', 'Functions', 'Loops', 'OOP', 'Data Structures', 'File Handling', 'Libraries'],
+    exams: ['NICET', 'GAT', 'TCS NQT', 'Infosys', 'Wipro', 'HCL'],
   },
   dsa: {
     name: 'DSA',
     icon: '🧮',
-    description: 'FAANG, GATE, NICET के लिए Data Structures & Algorithms',
-    topics: ['Arrays', 'Linked Lists', 'Trees', 'Graphs', 'Sorting', 'DP'],
-    exams: ['GATE', 'NICET', 'GAT', 'Google', 'Amazon', 'Microsoft'],
+    description: 'Data Structures & Algorithms for FAANG, GATE, NICET & placements',
+    color: 'from-purple-500 to-pink-500',
+    topics: ['Arrays', 'Linked Lists', 'Trees', 'Graphs', 'Sorting', 'DP', 'Hashing', 'Stacks & Queues'],
+    exams: ['GATE', 'NICET', 'GAT', 'Google', 'Amazon', 'Microsoft', 'LeetCode'],
   },
   sql: {
     name: 'SQL',
     icon: '🗃️',
-    description: 'Database queries for NICET, GAT, Data Analyst interviews',
-    topics: ['SELECT', 'JOINs', 'Aggregations', 'Subqueries', 'Indexing', 'Transactions'],
-    exams: ['NICET', 'GAT', 'TCS', 'Infosys', 'Data Analyst'],
+    description: 'Database queries for NICET, GAT, Data Analyst & backend interviews',
+    color: 'from-orange-500 to-amber-500',
+    topics: ['SELECT', 'JOINs', 'Aggregations', 'Subqueries', 'Indexing', 'Transactions', 'Window Functions'],
+    exams: ['NICET', 'GAT', 'TCS', 'Infosys', 'Data Analyst', 'Accenture'],
   },
   javascript: {
     name: 'JavaScript',
     icon: '⚡',
-    description: 'Frontend interviews, NICET, GAT के लिए JavaScript',
-    topics: ['Variables', 'Functions', 'Async/Await', 'DOM', 'Closures', 'Promises'],
-    exams: ['NICET', 'GAT', 'Frontend Interviews', 'Full-stack'],
+    description: 'JavaScript for frontend interviews, NICET, GAT & full-stack roles',
+    color: 'from-yellow-500 to-orange-500',
+    topics: ['Variables', 'Functions', 'Async/Await', 'DOM', 'Closures', 'Promises', 'ES6+', 'Event Loop'],
+    exams: ['NICET', 'GAT', 'Frontend Interviews', 'Full-stack', 'Startup Jobs'],
   },
   react: {
     name: 'React',
     icon: '⚛️',
-    description: 'Modern UI development for startup & product companies',
-    topics: ['Components', 'Props', 'State', 'Hooks', 'Context', 'Effects'],
-    exams: ['Frontend Interviews', 'Startup Jobs', 'Product Companies'],
+    description: 'Modern UI development for startups, product companies & frontend roles',
+    color: 'from-cyan-500 to-blue-500',
+    topics: ['Components', 'Props', 'State', 'Hooks', 'Context', 'Effects', 'Router', 'Performance'],
+    exams: ['Frontend Interviews', 'Startup Jobs', 'Product Companies', 'Full-stack'],
   },
   'system-design': {
     name: 'System Design',
     icon: '🏗️',
-    description: 'FAANG interviews, Senior roles के लिए System Architecture',
-    topics: ['Scalability', 'Databases', 'Caching', 'Load Balancing', 'APIs', 'Microservices'],
-    exams: ['FAANG', 'Senior Roles', 'Tech Lead', 'Architect'],
+    description: 'System Architecture for FAANG interviews, senior & tech lead roles',
+    color: 'from-green-500 to-emerald-500',
+    topics: ['Scalability', 'Databases', 'Caching', 'Load Balancing', 'APIs', 'Microservices', 'CDN'],
+    exams: ['FAANG', 'Senior Roles', 'Tech Lead', 'Architect', 'Staff Engineer'],
   },
   'computer-science': {
     name: 'Computer Science',
     icon: '🖥️',
-    description: 'GATE, NICET के लिए OS, DBMS, CN, TOC',
-    topics: ['Operating System', 'DBMS', 'Computer Networks', 'TOC', 'Compiler Design'],
-    exams: ['GATE', 'NICET', 'GAT', 'TCS', 'Infosys'],
-  },
-};
-
-export const nonTechSubjects: Record<NonTechSubject, {
-  name: string;
-  icon: string;
-  description: string;
-  topics: string[];
-  exams: string[];
-}> = {
-  physics: {
-    name: 'Physics',
-    icon: '⚡',
-    description: 'JEE Main/Advanced, NEET, NICET, GAT के लिए Physics',
-    topics: ['Mechanics', 'Thermodynamics', 'Optics', 'Electromagnetism', 'Modern Physics', 'Waves'],
-    exams: ['JEE Main', 'JEE Advanced', 'NEET', 'NICET', 'GAT', 'Board'],
-  },
-  chemistry: {
-    name: 'Chemistry',
-    icon: '🧪',
-    description: 'JEE, NEET, NICET के लिए Organic, Inorganic, Physical Chemistry',
-    topics: ['Organic', 'Inorganic', 'Physical Chemistry', 'Biochemistry', 'Reactions', 'Periodic Table'],
-    exams: ['JEE Main', 'JEE Advanced', 'NEET', 'NICET', 'GAT', 'Board'],
-  },
-  biology: {
-    name: 'Biology',
-    icon: '🧬',
-    description: 'NEET, AIIMS, NICET के लिए complete Biology',
-    topics: ['Cell Biology', 'Genetics', 'Evolution', 'Ecology', 'Human Anatomy', 'Botany'],
-    exams: ['NEET', 'AIIMS', 'NICET', 'GAT', 'Board', 'JIPMER'],
-  },
-  mathematics: {
-    name: 'Mathematics',
-    icon: '📐',
-    description: 'JEE, Board, NICET, GAT के लिए Mathematics',
-    topics: ['Algebra', 'Calculus', 'Geometry', 'Statistics', 'Trigonometry', 'Number Theory'],
-    exams: ['JEE Main', 'JEE Advanced', 'Board', 'NICET', 'GAT', 'KVPY'],
-  },
-  history: {
-    name: 'History',
-    icon: '🏛️',
-    description: 'UPSC, SSC, NICET, GAT के लिए Indian & World History',
-    topics: ['Ancient History', 'Medieval', 'Modern History', 'World Wars', 'Indian History', 'Revolutions'],
-    exams: ['UPSC', 'SSC', 'State PSC', 'NICET', 'GAT', 'Railway'],
-  },
-  geography: {
-    name: 'Geography',
-    icon: '🌍',
-    description: 'UPSC, SSC, NICET के लिए Physical & Human Geography',
-    topics: ['Physical Geography', 'Climate', 'Maps', 'Population', 'Resources', 'Environment'],
-    exams: ['UPSC', 'SSC', 'State PSC', 'NICET', 'GAT', 'Railway'],
-  },
-  english: {
-    name: 'English',
-    icon: '📖',
-    description: 'NICET, GAT, SSC, Bank exams के लिए English Grammar & Vocabulary',
-    topics: ['Grammar', 'Vocabulary', 'Comprehension', 'Error Spotting', 'Sentence Correction', 'Idioms'],
-    exams: ['NICET', 'GAT', 'SSC', 'Bank PO', 'CAT', 'CLAT'],
-  },
-  economics: {
-    name: 'Economics',
-    icon: '💰',
-    description: 'UPSC, Banking, NICET के लिए Indian Economy & Concepts',
-    topics: ['Micro Economics', 'Macro Economics', 'Indian Economy', 'Budget', 'Banking', 'Monetary Policy'],
-    exams: ['UPSC', 'RBI Grade B', 'Bank PO', 'SSC', 'NICET', 'GAT'],
-  },
-  'general-knowledge': {
-    name: 'General Knowledge',
-    icon: '📚',
-    description: 'All competitive exams के लिए Static GK & Current Affairs',
-    topics: ['Current Affairs', 'Static GK', 'Indian Polity', 'Science', 'Awards', 'Sports'],
-    exams: ['UPSC', 'SSC', 'Bank', 'Railway', 'NICET', 'GAT', 'State PSC'],
+    description: 'OS, DBMS, CN, TOC for GATE, NICET & core CS interviews',
+    color: 'from-indigo-500 to-violet-500',
+    topics: ['Operating System', 'DBMS', 'Computer Networks', 'TOC', 'Compiler Design', 'COA'],
+    exams: ['GATE', 'NICET', 'GAT', 'TCS', 'Infosys', 'ISRO'],
   },
 };
 
 export const getSubjectConfig = (subject: Subject) => {
-  if (subject in techSubjects) {
-    return techSubjects[subject as TechSubject];
-  }
-  return nonTechSubjects[subject as NonTechSubject];
+  return subjectConfig[subject];
 };
-
-export const subjectConfig = { ...techSubjects, ...nonTechSubjects };
