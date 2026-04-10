@@ -10,84 +10,39 @@ interface WelcomeMessageProps {
 
 const allStarterQuestions: Record<string, string[]> = {
   python: [
-    "Variables kya hote hain Python mein?",
-    "Functions explain karo with NICET pattern",
-    "Loops ke types aur use cases",
+    "Explain Python variables with exam examples",
+    "How do functions work? Show NICET pattern questions",
+    "Explain OOP concepts with interview questions",
   ],
   dsa: [
-    "Big O notation kya hai?",
-    "Array vs Linked List comparison",
-    "Binary Search step by step",
+    "What is Big O notation? Which companies ask this?",
+    "Compare Array vs Linked List with exam patterns",
+    "Explain Binary Search step by step with GATE questions",
   ],
   sql: [
-    "SELECT query basics for NICET",
-    "JOINs explain karo diagram ke saath",
-    "Primary key vs Foreign key",
+    "Explain JOINs with diagrams and company interview examples",
+    "What are Window Functions? Show Data Analyst questions",
+    "Subqueries vs JOINs - which exam asks what?",
   ],
   javascript: [
-    "let vs const vs var difference",
-    "Promises aur async/await kaise kaam karte hain?",
-    "Closures interview question",
+    "Explain Closures with real interview questions",
+    "How does the Event Loop work? Which companies ask this?",
+    "var vs let vs const - complete comparison with tricky questions",
   ],
   react: [
-    "React Components kya hote hain?",
-    "useState hook explain karo",
-    "Props vs State difference",
+    "Explain React Hooks with startup interview patterns",
+    "How does useState work internally?",
+    "Props vs State - complete guide with examples",
   ],
   'system-design': [
-    "URL shortener system design karo",
-    "Scaling basics for interviews",
-    "Load balancing kaise kaam karta hai?",
+    "Design a URL shortener - FAANG interview style",
+    "How does Load Balancing work? Architecture diagram",
+    "Database scaling strategies for senior interviews",
   ],
   'computer-science': [
-    "OSI model explain karo",
-    "Process vs Thread difference",
-    "Normalization in DBMS",
-  ],
-  physics: [
-    "Newton's laws JEE pattern mein samjhao",
-    "Momentum aur impulse kya hai?",
-    "Thermodynamics ke laws",
-  ],
-  chemistry: [
-    "Periodic table trends explain karo",
-    "Chemical bonding types NEET ke liye",
-    "Acids and bases reactions",
-  ],
-  biology: [
-    "Cell structure NEET diagram ke saath",
-    "DNA replication step by step",
-    "Evolution theory explain karo",
-  ],
-  mathematics: [
-    "Quadratic equations solve karna sikhao",
-    "Derivatives basics JEE ke liye",
-    "Probability fundamentals",
-  ],
-  history: [
-    "Indian Independence Movement timeline",
-    "World War I aur II overview",
-    "Mughal Empire UPSC pattern",
-  ],
-  geography: [
-    "Plate tectonics kya hai?",
-    "Indian climate zones explain karo",
-    "Population distribution in India",
-  ],
-  english: [
-    "Tenses grammar rules",
-    "Common error spotting SSC pattern",
-    "Vocabulary building tips",
-  ],
-  economics: [
-    "GDP aur GNP difference",
-    "Inflation kya hoti hai?",
-    "Indian Budget basics UPSC ke liye",
-  ],
-  'general-knowledge': [
-    "Important current affairs this month",
-    "Indian Constitution basics",
-    "Famous awards aur winners",
+    "Explain Process vs Thread with GATE questions",
+    "OSI Model - complete breakdown for NICET",
+    "Normalization in DBMS - exam-focused explanation",
   ],
 };
 
@@ -98,12 +53,10 @@ export function WelcomeMessage({ subject, prepSettings, onStartConversation }: W
   return (
     <div className="flex-1 flex items-center justify-center p-6">
       <div className="max-w-sm w-full slide-up">
-        {/* Icon */}
-        <div className="w-12 h-12 rounded-xl bg-primary/10 flex items-center justify-center mb-4">
+        <div className={`w-12 h-12 rounded-xl bg-gradient-to-br ${config.color} flex items-center justify-center mb-4`}>
           <span className="text-2xl">{config.icon}</span>
         </div>
 
-        {/* Title */}
         <h1 className="text-xl font-semibold text-foreground mb-1">
           {config.name}
         </h1>
@@ -111,7 +64,6 @@ export function WelcomeMessage({ subject, prepSettings, onStartConversation }: W
           {config.description}
         </p>
 
-        {/* Prep Settings Summary */}
         {prepSettings && (
           <div className="mb-6 p-3 rounded-lg bg-primary/5 border border-primary/20 space-y-2">
             <div className="flex items-center gap-2 text-xs text-muted-foreground">
@@ -129,7 +81,6 @@ export function WelcomeMessage({ subject, prepSettings, onStartConversation }: W
           </div>
         )}
 
-        {/* Quick starts */}
         <div className="space-y-2">
           <p className="text-xs font-medium text-muted-foreground mb-2">Try asking</p>
           {starterQuestions.map((question) => (
@@ -139,21 +90,20 @@ export function WelcomeMessage({ subject, prepSettings, onStartConversation }: W
               className="w-full flex items-center justify-between px-3 py-2.5 rounded-lg bg-card border hover:bg-accent hover:border-primary/20 transition-colors text-left group"
             >
               <span className="text-sm text-foreground">{question}</span>
-              <ArrowRight className="w-3.5 h-3.5 text-muted-foreground group-hover:text-primary transition-colors" />
+              <ArrowRight className="w-3.5 h-3.5 text-muted-foreground group-hover:text-primary transition-colors shrink-0 ml-2" />
             </button>
           ))}
         </div>
 
-        {/* Topics */}
         <div className="mt-6 pt-4 border-t">
-          <p className="text-xs text-muted-foreground mb-2">Topics covered</p>
+          <p className="text-xs text-muted-foreground mb-2">Target Exams</p>
           <div className="flex flex-wrap gap-1.5">
-            {config.topics.slice(0, 5).map((topic) => (
+            {config.exams.map((exam) => (
               <span
-                key={topic}
-                className="px-2 py-0.5 text-xs rounded-md bg-muted text-muted-foreground"
+                key={exam}
+                className="px-2 py-0.5 text-xs rounded-md bg-primary/10 text-primary font-medium"
               >
-                {topic}
+                {exam}
               </span>
             ))}
           </div>

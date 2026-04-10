@@ -1,5 +1,5 @@
 import { useState, useCallback } from 'react';
-import { Message, Subject, Field, ChatState, PrepSettings } from '@/types/chat';
+import { Message, Subject, ChatState, PrepSettings } from '@/types/chat';
 import { supabase } from '@/integrations/supabase/client';
 
 const generateId = () => Math.random().toString(36).substring(2, 9);
@@ -7,28 +7,17 @@ const generateId = () => Math.random().toString(36).substring(2, 9);
 export function useChatStore() {
   const [state, setState] = useState<ChatState>({
     messages: [],
-    field: null,
     subject: null,
     prepSettings: null,
     isLoading: false,
     progress: 0,
   });
 
-  const setField = useCallback((field: Field) => {
-    setState((prev) => ({
-      ...prev,
-      field,
-      subject: null,
-      prepSettings: null,
-      messages: [],
-      progress: 0,
-    }));
-  }, []);
-
   const setSubject = useCallback((subject: Subject) => {
     setState((prev) => ({
       ...prev,
       subject,
+      prepSettings: null,
       messages: [],
       progress: 0,
     }));
@@ -41,25 +30,14 @@ export function useChatStore() {
     }));
   }, []);
 
-  const resetToFieldSelection = useCallback(() => {
+  const resetToSubjectSelection = useCallback(() => {
     setState({
       messages: [],
-      field: null,
       subject: null,
       prepSettings: null,
       isLoading: false,
       progress: 0,
     });
-  }, []);
-
-  const resetToSubjectSelection = useCallback(() => {
-    setState((prev) => ({
-      ...prev,
-      subject: null,
-      prepSettings: null,
-      messages: [],
-      progress: 0,
-    }));
   }, []);
 
   const resetToPrepSettings = useCallback(() => {
@@ -91,11 +69,9 @@ export function useChatStore() {
   const sendMessage = useCallback(async (content: string) => {
     setState((prev) => ({ ...prev, isLoading: true }));
 
-    // Add user message
     addMessage('user', content);
 
     try {
-      // Get the last N messages for context (keeping it simple with last 10)
       const recentMessages = [...state.messages.slice(-10), { role: 'user' as const, content }];
 
       const { data, error } = await supabase.functions.invoke('tutor-chat', {
@@ -111,13 +87,12 @@ export function useChatStore() {
 
       if (error) throw error;
 
-      // Add assistant response
       addMessage('assistant', data.response);
     } catch (error) {
       console.error('Error sending message:', error);
       addMessage(
         'assistant',
-        "Hmm, I seem to be having trouble right now. Could you try asking again? Sometimes my thinking cap needs a moment! 🎓"
+        "Hmm, I seem to be having trouble right now. Could you try asking again? 🎓"
       );
     } finally {
       setState((prev) => ({ ...prev, isLoading: false }));
@@ -148,10 +123,8 @@ export function useChatStore() {
 
   return {
     ...state,
-    setField,
     setSubject,
     setPrepSettings,
-    resetToFieldSelection,
     resetToSubjectSelection,
     resetToPrepSettings,
     sendMessage,
